@@ -1,0 +1,54 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/admin/admin-page" class="btn btn-warning"> Back </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-category" class="btn btn-success">+ Nueva categoria</a>
+  </div>
+</div>
+
+{{#if hasCategories}}
+
+<h1>Category list</h1>
+
+<div class="row mt-2">
+  <table class="table table-hover table-bordered rounded-3">
+    <thead class="table-dark">
+      <tr class="text-center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Cantidad de Libros</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each cats}}
+      <tr class="align-middle">
+        <th scope="row" class="text-center">{{this.name}}</th>
+        <td class="text-center">{{this.description}}</td>
+        <td class="text-center">{{this.bookCount}}</td>
+        <td class="d-flex justify-content-center">
+          <form
+                method="post"
+                action="/admin/category-delete"
+                class="form-delete"
+              >
+                <input type="hidden" value="{{this.id}}" name="CategoryId" />
+                <button
+                  type="submit"
+                  class="btn btn-danger me-2 delete-category"
+                >Delete</button>
+          </form>
+           <a href="/admin/edit-category/{{this.id}}" class="btn btn-primary mx-3">Edit</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{else}}
+
+<h1>No Categories found!</h1>
+
+{{/if}}

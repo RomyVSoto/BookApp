@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12 col-sm-6 offset-sm-3">
+
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        Formulario de Autor
+      </div>
+      <div class="card-body">
+
+        <form method="POST" action="/admin/{{#if editMode}}edit-author{{else}}add-author{{/if}}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" {{#if editMode}} value="{{author.name}}" {{/if}} class="form-control" id="name" name="Name" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" {{#if editMode}} value="{{author.email}}" {{/if}} class="form-control" id="email" name="Email" required />
+          </div>
+          
+        {{#if editMode}}
+          <input type="hidden" value="{{author.id}}" name="RegionId">
+        {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end">Save</button>
+           <a href="/admin/authors" class="btn btn-warning float-end me-2">Back to list</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

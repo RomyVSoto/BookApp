@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-12 col-sm-6 offset-sm-3">
+
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        Formulario de Editorial
+      </div>
+      <div class="card-body">
+
+        <form method="POST" action="/admin/{{#if editMode}}edit-editorial{{else}}add-editorial{{/if}}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" {{#if editMode}} value="{{editorial.name}}" {{/if}} class="form-control" id="name" name="Name" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="telephone" class="form-label">Telefono</label>
+            <input type="tel" {{#if editMode}} value="{{editorial.telephone}}" {{/if}} class="form-control" id="telephone" name="Telephone" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="country" class="form-label">Pais</label>
+            <input type="tel" {{#if editMode}} value="{{editorial.country}}" {{/if}} class="form-control" id="country" name="Country" required />
+          </div>
+
+
+        {{#if editMode}}
+          <input type="hidden" value="{{editorialid}}" name="EditorialId">
+        {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end">Save</button>
+           <a href="/admin/editorials" class="btn btn-warning float-end me-2">Back to list</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-12 col-sm-6 offset-sm-3">
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        Formulario de Libro
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/admin/{{#if editMode}}edit-book{{else}}add-book{{/if}}" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="title" class="form-label">Titulo</label>
+            <input type="text" {{#if editMode}} value="{{book.title}}" {{/if}} class="form-control" id="title"
+              name="Title" required />
+          </div>
+          
+          <div class="mb-3">
+            <label for="image">Imagen</label>
+            <input type="file" {{#if editMode}} value="{{book.imageUrl}}" {{/if}} class="form-control" id="image"
+              name="image" required>
+          </div>
+          <div class="mb-3 d-flex">
+            <label for="year" class="form-label mt-2">Año de Publicacion: </label>
+            <input class="year form-control mx-2" style="width: 100px;" type="text" name="Year" {{#if editMode}}
+              value="{{book.year}}" {{/if}} required />
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Categoria</label>
+            <select class="form-control" id="category" name="CategoryId" required>
+              <option value="" selected>Categoria</option>
+              {{#each categories}}
+              <option value="{{this.id}}" {{#if (eq this.id ../book.categoryId)}}selected{{/if}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Autor</label>
+            <select class="form-control" id="author" name="AuthorId" required>
+              <option value="" selected>Autor</option>
+              {{#each authors}}
+              <option value="{{this.id}}" {{#if (eq this.id ../book.authorId)}}selected{{/if}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editorial" class="form-label">Editorial</label>
+            <select class="form-control" id="editorial" name="EditorialId" required>
+              <option value="" selected>Editorial</option>
+              {{#each editorials}}
+              <option value="{{this.id}}" {{#if (eq this.id ../book.editorialId)}}selected{{/if}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          {{#if editMode}}
+          <input type="hidden" value="{{book.id}}" name="BookId">
+          {{/if}}
+          <button type="submit" class="btn btn-primary float-end">Save</button>
+          <a href="/admin/books" class="btn btn-warning float-end me-2">Back</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+  const currentYear = new Date().getFullYear();
+  $('.year').datepicker({
+    minViewMode: 2,
+    format: 'yyyy',
+    endDate: currentYear.toString(),
+  });
+</script>

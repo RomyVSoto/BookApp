@@ -1,0 +1,56 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/admin/admin-page" class="btn btn-warning"> Back </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-editorial" class="btn btn-success mb-2">+ Nueva editorial</a>
+  </div>
+</div>
+
+{{#if hasEditorials}}
+
+<h1>Editorial list</h1>
+
+<div class="row mt-2">
+  <table class="table table-hover table-bordered rounded-3">
+    <thead class="table-dark">
+      <tr class="text-center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">País</th>
+        <th scope="col">Cantidad de Libros</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each edits}}
+      <tr class="align-middle">
+        <th scope="row" class="text-center">{{this.name}}</th>
+        <td class="text-center">{{this.telephone}}</td>
+        <td class="text-center">{{this.country}}</td>
+        <td class="text-center">{{this.bookCount}}</td>
+        <td class="d-flex justify-content-center">
+          <form
+                method="post"
+                action="/admin/editorial-delete"
+                class="form-delete"
+              >
+                <input type="hidden" value="{{this.id}}" name="EditorialId" />
+                <button
+                  type="submit"
+                  class="btn btn-danger me-2 delete-editorial"
+                >Delete</button>
+          </form>
+           <a href="/admin/edit-editorial/{{this.id}}" class="btn btn-primary mx-3">Edit</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{else}}
+
+<h1>No editorials found!</h1>
+
+{{/if}}

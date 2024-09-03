@@ -1,0 +1,60 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/admin/admin-page" class="btn btn-warning"> Back </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-book" class="btn btn-success">+ Nuevo libro</a>
+  </div>
+</div>
+
+{{#if hasBooks}}
+
+  <h1>Book list</h1>
+
+  <div class="row">
+
+    {{#each books}}
+
+      <div class="col-12 col-sm-4 mb-4">
+        <div class="card">
+          <img
+            src="{{this.imageUrl}}"
+            class="card-img-top img-size"
+            alt="..." height="550px"
+          />
+          <div class="card-body">
+            <h4 class="card-title text-center mb-3">{{this.title}}</h4>
+            <h5 class="card-title"><em>Categoria:</em> {{this.category.name}}</h5>
+            <h5 class="card-title"><em>Autor:</em> {{this.author.name}}</h5>
+            <h5 class="card-title"><em>Editorial:</em> {{this.editorial.name}}</h5>
+            <div class="mt-2">
+              <a
+                href="/admin/edit-book/{{this.id}}"
+                class="btn btn-primary float-end"
+              >Edit</a>
+              <form
+                method="post"
+                action="/admin/book-delete"
+                class="form-delete"
+              >
+                <input type="hidden" value="{{this.id}}" name="BookId" />
+                <button
+                  type="submit"
+                  class="btn btn-danger float-end me-2 delete-book"
+                >Delete</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {{/each}}
+
+  </div>
+
+{{else}}
+
+  <h1>No books found!</h1>
+
+{{/if}}
